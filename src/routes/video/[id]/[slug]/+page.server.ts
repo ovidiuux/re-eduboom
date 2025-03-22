@@ -1,11 +1,13 @@
 import { parse } from "node-html-parser";
 import type { PageServerLoad } from "./$types";
+import cloudscraper from "cloudscraper";
 
 export const load: PageServerLoad = async ({ params, setHeaders }) => {
     const { id, slug } = params;
 
-    const response = await fetch(`https://eduboom.ro/video/${id}/${slug}`);
-    const htmlText = await response.text();
+    const response = await cloudscraper.get(`https://eduboom.ro/video/${id}/${slug}`);
+    const htmlText = response
+
 
     const html = parse(htmlText);
     const premiumM3U8 = "https://proxy1.eduboom.ro/eduboom/_definist_/smil:videos/%ID%/stream.smil/playlist.m3u8"
