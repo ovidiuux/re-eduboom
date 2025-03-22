@@ -6,7 +6,7 @@ export const GET: RequestHandler = async ({ url }) => {
     const searchTerm = url.searchParams.get('q');
 
     try {
-        const jsonEduboom = await cloudscraper.get(`https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`);
+        const jsonEduboom = await cloudscraper.get(`https://justcors.com/tl_c014bfb/https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`);
 
         const data = JSON.parse(jsonEduboom);
 
