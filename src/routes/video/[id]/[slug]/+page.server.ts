@@ -1,12 +1,11 @@
 import { parse } from "node-html-parser";
 import type { PageServerLoad } from "./$types";
-import cloudscraper from "cloudscraper";
 
 export const load: PageServerLoad = async ({ params, setHeaders }) => {
     const { id, slug } = params;
 
-    const response = await cloudscraper.get(`https://eduboom.ro/video/${id}/${slug}`);
-    const htmlText = response
+    const response = await fetch(`https://eduboom.ro/video/${id}/${slug}`);
+    const htmlText = await response.text()
 
 
     const html = parse(htmlText);
