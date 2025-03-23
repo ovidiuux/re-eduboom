@@ -27,14 +27,19 @@
         return () => window.removeEventListener("scroll", handleScroll);
     });
 
+
    
     $effect(() => {
         if (searchTerm) {
             isLoading = true;
-            fetch(`/api/lessons?q=${searchTerm}`)
+            fetch(`https://corsproxy.io/?url=https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    searchResults = data;
+                .then((jsonEduboom) => {
+                    searchResults = jsonEduboom.map((r): => ({
+            ...r,
+            url: r.url.replace('https://eduboom.ro', '')
+        }));
+    
                     isLoading = false;
                 })
                 .catch((error) => {
@@ -56,9 +61,12 @@
     <div class="container-fluid fluid-side-padding not-signed-in">
         <div class="row justify-content-end">
             <div id="left-header-section" class="col-auto d-flex">
-         
                 <a href="/" id="header-logo" aria-label="Acasă">
-                    <h3 style="color: white; padding-top: 0.26rem; font-size:1.89=rem">re-eduboom</h3>
+                    <h3
+                        style="color: white; padding-top: 0.26rem; font-size:1.89=rem"
+                    >
+                        re-eduboom
+                    </h3>
                 </a>
             </div>
             <a
@@ -85,10 +93,9 @@
                 >
                     Lecții și teste
                 </span>
-              
             </a>
             <div id="watched-videos-counter" class="col-auto d-flex"></div>
-              
+
             <div
                 id="right-header-section"
                 class="justify-content-end d-flex col-auto align-items-center text-right pl-0 order-4 pr-2 no-usersession"
@@ -123,7 +130,6 @@
             class={`search-not-logged search-box collapse header-nav w-100 text-center bg-tarra px-2 px-md-3 ${searchHeaderEnabled ? "show" : ""}`}
             aria-label="Căutare"
         >
-    
             <div
                 class="mt-2 mb-1 col-md-8 offset-md-2 p-0 search-field text-emma text-left"
             >
@@ -151,10 +157,11 @@
         <li class="col-12 col-md-8 offset-md-2 ui-menu-item">
             <a
                 href={result.url}
-                onclick={()=> setTimeout(()=>{
-                      searchHeaderEnabled = false;
-                      searchResults = [] 
-                },300)}
+                onclick={() =>
+                    setTimeout(() => {
+                        searchHeaderEnabled = false;
+                        searchResults = [];
+                    }, 300)}
                 id="ui-id-58"
                 class="ui-menu-item-wrapper"
             >
