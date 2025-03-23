@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-12">
                         <a
-                            href="/lectii-pe-materii/limba-engleza-in-engleza/nivel-a2"
+                            href={data.backlink}
                             class="text-xxs-bold mt-2 d-inline-block"
                             id="videos-backlink"
                             data-ga-click="subheader-backlink"

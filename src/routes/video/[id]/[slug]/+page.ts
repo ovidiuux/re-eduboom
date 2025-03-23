@@ -23,6 +23,7 @@ export const load: PageLoad = async ({ params }) => {
             keywords: html.querySelectorAll("span[itemprop='keywords']").map(item => item.innerText.replace(/^\s+|\s+$/g, '')).slice(0, 4)
 
         },
+        backlink: html.getElementById("videos-backlink")?.attributes.href.replaceAll("https://eduboom.ro/", "/"),
         description: html.querySelector("meta[name='description']").attributes.content,
         image: html.querySelector("meta[itemprop='image']").attributes.content,
         streaming_key: streaming_key,
