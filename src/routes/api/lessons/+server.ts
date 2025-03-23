@@ -1,13 +1,12 @@
 import { json, text } from '@sveltejs/kit';
-import got from 'cloudflare-scraper';
 
 export const GET = async ({ url }) => {
     const searchTerm = url.searchParams.get('q');
 
     try {
-        const jsonEduboom = await got.get(
-            `https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`
-        ).json();
+        const jsonEduboom = await (await fetch(
+            `https://corsproxy.io/?url=https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`
+        )).json();
 
         let returnData = jsonEduboom.map((r: any) => ({
             ...r,
