@@ -21,9 +21,8 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-		"cloudscraper": "^4.6.0",
+		"cloudflare-scraper": "^2.0.0",
 		"hls.js": "^1.5.20",
-		"html-svelte-parser": "^1.0.0",
 		"node-html-parser": "^7.0.1"
 	}
 }
