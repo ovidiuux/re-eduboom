@@ -1,10 +1,10 @@
 import { parse } from "node-html-parser";
-import type { PageServerLoad } from "./$types";
+import type { PageLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ params, setHeaders }) => {
+export const load: PageLoad = async ({ params }) => {
     const { id, slug } = params;
 
-    const response = await fetch(`https://eduboom.ro/video/${id}/${slug}`);
+    const response = await fetch(`https://corsproxy.io/?url=https://eduboom.ro/video/${id}/${slug}`);
     const htmlText = await response.text()
 
 
