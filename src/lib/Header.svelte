@@ -34,11 +34,15 @@
             isLoading = true;
             fetch(`https://corsproxy.io/?url=https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`)
                 .then((response) => response.json())
-                .then((jsonEduboom) => {
-                    searchResults = jsonEduboom.map((r): => ({
-            ...r,
-            url: r.url.replace('https://eduboom.ro', '')
-        }));
+                .then((response) => {
+                    searchResults = response.map((r) => ({
+                     ...r,
+                     url: r.url.replace('https://eduboom.ro', '')
+                    }));
+
+                    if (response[0]?.url === '') {
+                      searchResults = [];
+                    }
     
                     isLoading = false;
                 })
