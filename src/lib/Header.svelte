@@ -7,16 +7,11 @@
 
     const { color = "color-primary" } = $props();
 
-
-    // Efect pentru a actualiza clasa body în funcție de headerEnabled și searchHeaderEnabled
     $effect(() => {
         const bodyElement = document.querySelector("body");
-        if (bodyElement) {
-       //     bodyElement.classList.toggle("header-only", headerEnabled || searchHeaderEnabled);
+        if (bodyElement)
             bodyElement.classList.toggle("search-box", searchHeaderEnabled);
-        }
     });
-
 
     $effect(() => {
         const handleScroll = () => {
@@ -27,27 +22,37 @@
         return () => window.removeEventListener("scroll", handleScroll);
     });
 
-
-   
     $effect(() => {
         if (searchTerm) {
             isLoading = true;
-            fetch(`https://corsproxy.io/?url=https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`)
-                .then((response) => response.json())
+            fetch(
+                `https://corsproxy.io/?url=https://eduboom.ro/ajax/lessons-search?term=${searchTerm}`,
+            )
                 .then((response) => {
-                    searchResults = response.map((r) => ({
-                     ...r,
-                     url: r.url.replace('https://eduboom.ro', '')
-                    }));
-
-                    if (response[0]?.url === '') {
-                      searchResults = [];
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
                     }
-    
-                    isLoading = false;
+                    return response.json();
+                })
+                .then((response) => {
+                    if (Array.isArray(response)) {
+                        searchResults = response.map((r) => ({
+                            ...r,
+                            url: r.url.replace("https://eduboom.ro", ""),
+                        }));
+
+                        if (response[0]?.url === "") {
+                            searchResults = [];
+                        }
+                    } else {
+                        searchResults = [];
+                    }
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error("Error fetching search results:", error);
+                    searchResults = [];
+                })
+                .finally(() => {
                     isLoading = false;
                 });
         } else {

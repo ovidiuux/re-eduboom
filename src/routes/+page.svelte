@@ -1,10 +1,8 @@
 <script>
     import Header from "$lib/Header.svelte";
-
 </script>
-<Header>
-    
-</Header>
+
+<Header></Header>
 
 <div id="lessons-page" data-category-id="" data-grade-id="">
     <div
@@ -28,7 +26,7 @@
         <ul id="all-videos-page" class="row nav categories-matrix">
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-1"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -165,7 +163,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-12"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -228,7 +226,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-2"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -365,7 +363,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-13"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -428,7 +426,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-3"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -504,7 +502,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-4"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -590,7 +588,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-5"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -686,7 +684,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-15"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -793,7 +791,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-6"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -900,7 +898,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-9"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -953,7 +951,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-14"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a
@@ -1021,7 +1019,7 @@
 
             <li
                 class="col-6 col-sm-3 col-md-12 matrix-category-7"
-                itemscope=""
+                itemscope
                 itemtype="http://schema.org/SiteNavigationElement"
             >
                 <a

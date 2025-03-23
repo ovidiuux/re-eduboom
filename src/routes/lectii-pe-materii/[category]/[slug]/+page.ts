@@ -16,13 +16,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
         const wrap = html.getElementById('wrap');
 
         return {
-            color: html?.getElementById("header").classNames.replace("-2", ""),
+            color: html?.getElementById("header")?.classNames.replace("-2", ""),
             wrap: wrap?.innerHTML.replaceAll("https://eduboom.ro/", "/") || "<p>Content not found</p>"
         };
     } catch (error) {
-        console.error("Failed to fetch data:", error);
         return {
-            color: "default-color",
+            color: "",
             wrap: "<h4>" + error + "</h4>"
         };
     }

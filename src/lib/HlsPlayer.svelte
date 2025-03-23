@@ -5,42 +5,39 @@
   const { videoSrc, poster, key } = $props();
 
   let videoElement: HTMLVideoElement;
-  let hlsInstance: Hls;
+  let hlsInstance: Hls | null = null;
 
   const initializeHls = (src: string) => {
+    if (!videoElement) return; // Verificăm dacă elementul video există
+
     if (Hls.isSupported()) {
       if (hlsInstance) {
-        hlsInstance.destroy();
+        hlsInstance.destroy(); // Distrugem instanța existentă
+        hlsInstance = null;
       }
+
       hlsInstance = new Hls();
       hlsInstance.loadSource(src);
       hlsInstance.attachMedia(videoElement);
 
-      hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-        console.log("Video loaded and ready to play");
-      });
-
       hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-        console.error("HLS error:", data);
         if (data.fatal) {
           switch (data.type) {
             case Hls.ErrorTypes.NETWORK_ERROR:
-              hlsInstance.startLoad();
+              hlsInstance?.startLoad();
               break;
             case Hls.ErrorTypes.MEDIA_ERROR:
-              hlsInstance.recoverMediaError();
+              hlsInstance?.recoverMediaError();
               break;
             default:
-              hlsInstance.destroy();
+              hlsInstance?.destroy();
+              hlsInstance = null;
               break;
           }
         }
       });
     } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
       videoElement.src = src;
-      videoElement.addEventListener("loadedmetadata", () => {
-        console.log("Video loaded and ready to play");
-      });
     }
   };
 
@@ -50,8 +47,16 @@
     return () => {
       if (hlsInstance) {
         hlsInstance.destroy();
+        hlsInstance = null;
       }
     };
+  });
+
+  onDestroy(() => {
+    if (hlsInstance) {
+      hlsInstance.destroy();
+      hlsInstance = null;
+    }
   });
 
   // Svelte 5 effect to reinitialize HLS when videoSrc changes
@@ -70,12 +75,3 @@
   autoplay
   bind:this={videoElement}
 ></video>
-
-<style>
-  video {
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    display: block;
-  }
-</style>

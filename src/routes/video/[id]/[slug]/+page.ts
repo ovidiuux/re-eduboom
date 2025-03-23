@@ -5,7 +5,6 @@ export const prerender = false;
 export const ssr = false;
 
 export const load: PageLoad = async ({ params }) => {
-    // Verifică dacă codul rulează în browser
     if (!browser) return;
 
     const { id, slug } = params;
@@ -27,7 +26,7 @@ export const load: PageLoad = async ({ params }) => {
             return { status: 404, error: "Player element not found" };
         }
 
-        let streaming_license = {};
+        let streaming_license: any = {};
         try {
             streaming_license = JSON.parse(playerElement.getAttribute('data-params') || '{}');
         } catch {
@@ -53,7 +52,7 @@ export const load: PageLoad = async ({ params }) => {
                 title: h1Element?.textContent?.trim() || "No Title",
                 category: backlinkElement?.textContent?.trim() || "No Category",
                 keywords: Array.from(doc.querySelectorAll("span[itemprop='keywords']"))
-                    .map(item => item.textContent.trim())
+                    .map(item => item.textContent?.trim())
                     .slice(0, 4)
             },
             backlink: backlinkElement?.getAttribute("href")?.replace("https://eduboom.ro/", "/") || "#",

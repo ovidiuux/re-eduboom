@@ -3,17 +3,18 @@
     import HlsPlayer from "$lib/HlsPlayer.svelte";
     import { onMount } from "svelte";
 
-    let watchNav = $state(false)
+    let watchNav = $state(false);
 
     $effect(() => {
-    const navWrap = document.getElementById("watch-nav-wrap");
-    if (navWrap) navWrap.className = watchNav ? "" : "collapse";
-  });
+        const navWrap = document.getElementById("watch-nav-wrap");
+        if (navWrap) navWrap.className = watchNav ? "" : "collapse";
+    });
 
-  onMount(()=>{
-    const uchase = document.getElementById("uchase-nav")
-    if (uchase) uchase.style = `transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);`
-  })
+    onMount(() => {
+        const uchase = document.getElementById("uchase-nav");
+        if (uchase)
+            uchase.style = `transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);`;
+    });
     const { data } = $props();
 </script>
 
@@ -41,7 +42,7 @@
                             data-ga-click="subheader-backlink"
                         >
                             <span class="arrow"></span>
-                            {data.video_data.category}
+                            {data.video_data?.category}
                         </a>
                     </div>
                     <div class="col-12">
@@ -49,7 +50,7 @@
                             class="text-xs-bold fs-md-l text-tarra mb-3 mb-md-5 pt-1"
                             itemProp="name"
                         >
-                            {data.video_data.title}
+                            {data.video_data?.title}
                         </h1>
                     </div>
                 </div>
@@ -110,9 +111,9 @@ not-existing"
                 <a
                     href="#re-edu"
                     id="watch-nav-mobile-toggler"
-                    class={`video-nav-toggler ${watchNav ? '' : 'collapsed'}`}
+                    class={`video-nav-toggler ${watchNav ? "" : "collapsed"}`}
                     role="button"
-                    onclick={()=> watchNav = !watchNav}
+                    onclick={() => (watchNav = !watchNav)}
                     aria-expanded="false"
                     aria-controls="watch-nav-wrap"
                 >
@@ -177,7 +178,7 @@ not-existing"
                                 <div
                                     class="subcategories-body text-xs-semibold text-jane pb-3"
                                 >
-                                    {data.video_data.category}
+                                    {data.video_data?.category}
                                 </div>
                             </div>
 
@@ -190,7 +191,7 @@ not-existing"
                                 class="keywords-body text-xs-semibold text-jane"
                             >
                                 <div class="keywords-list mt-0">
-                                    {data.video_data.keywords}
+                                    {data.video_data?.keywords}
                                 </div>
                             </div>
                         </div>
