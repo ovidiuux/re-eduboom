@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load: PageLoad = async ({ params }) => {
     const { id, slug } = params;
 
     try {
