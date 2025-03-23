@@ -20,7 +20,7 @@
 
     $effect(() => {
         const handleScroll = () => {
-            scrolled = winldow.scrollY > 20;
+            scrolled = window.scrollY > 20;
         };
 
         window.addEventListener("scroll", handleScroll);
