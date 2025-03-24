@@ -1,7 +1,11 @@
 <script>
     import Header from "$lib/Header.svelte";
     import HlsPlayer from "$lib/HlsPlayer.svelte";
-    import { onMount } from "svelte";
+    import {onMount } from "svelte";
+
+    const { data } = $props();
+    
+    data.playlist = data.playlist;
 
     let watchNav = $state(false);
 
@@ -10,15 +14,33 @@
         if (navWrap) navWrap.className = watchNav ? "" : "collapse";
     });
 
-    onMount(() => {
+    function uchaseNav() {
         const uchase = document.getElementById("uchase-nav");
-        if (uchase)
-            uchase.style = `transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);`;
+        const selectedElement = document.querySelector("#uchase-nav .selected");
+
+        if (uchase && selectedElement) {
+            const selectedRect = selectedElement.getBoundingClientRect();
+            const uchaseRect = uchase.getBoundingClientRect();
+
+            const translateY = selectedRect.top - uchaseRect.top;
+
+            uchase.style.transform = `translate3d(0px, ${-translateY}px, 0px)`;
+            uchase.style.transitionDuration = "0ms";
+        }
+    }
+    onMount(() => {
+       uchaseNav();
     });
-    const { data } = $props();
+
+    $effect(()=>{
+        const interval = setInterval(()=> uchaseNav(), 100)
+    
+        return clearInterval(interval)
+    })
+
 </script>
 
-<Header color={data.color}></Header>
+<Header color={data.color} />
 <div id="wrap">
     <div id="watch-page">
         <div
@@ -137,7 +159,9 @@ not-existing"
                         </div>
                     </div>
                     <div class="col-12 col-md-3 pl-md-1 side-nav-wrap">
-                        {@html data.playlist}
+                        {#if data.playlist}
+                            {@html data.playlist}
+                        {/if}
                     </div>
                 </div>
                 <div class="row">
