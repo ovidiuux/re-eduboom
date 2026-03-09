@@ -10,7 +10,7 @@ export const load: PageLoad = async ({ params }) => {
     const { id, slug } = params;
 
     try {
-        const response = await fetch(`https://corsproxy.io/?url=https://eduboom.ro/video/${id}/${slug}`);
+        const response = await fetch(`https://justcors.com/l_naqufodjfw/https://eduboom.ro/video/${id}/${slug}`);
         if (!response.ok) {
             throw new Error(`Failed to fetch: ${response.statusText}`);
         }
