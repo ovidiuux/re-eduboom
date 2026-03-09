@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     const { category, slug } = params;
 
     try {
-        const response = await fetch(`https://corsproxy.io/?url=https://eduboom.ro/lectii-pe-materii/${category}/${slug}`);
+        const response = await fetch(`https://justcors.com/tl_942bfd1/https://eduboom.ro/lectii-pe-materii/${category}/${slug}`);
 
         const htmlText = await response.text();
 
